@@ -1,0 +1,1 @@
+// kalau ada template buat footer digunakan di beberapa page
