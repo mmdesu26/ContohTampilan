@@ -1,0 +1,189 @@
+/* --- Reset & Base Styling --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+.dashboard-container {
+    max-width: 600px; /* Maksimum width untuk tampilan mobile-first */
+    margin: 0 auto;
+    padding: 0;
+}
+.content-wrapper { padding: 0 15px 20px 15px; }
+
+/* --- Header Gradien (Sama untuk semua role) --- */
+.header-gradient, .siswa-header, .admin-header, .petugas-header {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+}
+.header-gradient img, .siswa-header img, .admin-header img, .petugas-header img {
+    width: 60px; /* Ukuran logo di mobile */
+    margin-bottom: 10px;
+}
+
+/* --- Card Style & Animasi Fade-in --- */
+.card {
+    background: white;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease-in-out;
+    opacity: 0; /* Untuk animasi fade-in */
+    animation: fadeIn 0.8s forwards;
+}
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+.card:hover { transform: translateY(-3px); }
+
+/* --- Button Styling & Responsiveness --- */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 25px; /* Bentuk kapsul */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    margin: 5px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.btn:active { transform: scale(0.98); } /* Animasi klik */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.button-group .btn { flex-grow: 1; margin: 0; } /* Tombol mengisi ruang */
+
+/* Warna Khusus Izin */
+.btn-izin-keluar { background-color: #007bff; color: white; }
+.btn-izin-jemput { background-color: #4CAF50; color: white; }
+.btn-izin-masuk { background-color: #ff9800; color: white; }
+.btn-success { background-color: #28a745; color: white; }
+.btn-info { background-color: #17a2b8; color: white; }
+.btn-danger { background-color: #dc3545; color: white; }
+.btn-danger-soft { background-color: #ffcccc; color: #dc3545; border: 1px solid #dc3545; }
+
+/* --- Status Badges (Siswa/Petugas) --- */
+.status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: bold;
+    display: inline-block;
+}
+.status-success { background-color: #28a745; color: white; }
+.status-success-light { background-color: #d4edda; color: #155724; }
+.status-pending { background-color: #ffc107; color: white; }
+.status-danger { background-color: #dc3545; color: white; }
+.badge-success { background-color: #d4edda; color: #155724; padding: 3px 6px; border-radius: 4px; }
+.badge-danger { background-color: #f8d7da; color: #721c24; padding: 3px 6px; border-radius: 4px; }
+
+/* --- Petugas & Riwayat Siswa Styling --- */
+.riwayat-izin-section h4 { margin-top: 5px; margin-bottom: 2px; }
+.izin-item { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px; }
+.izin-item:last-child { border-bottom: none; }
+
+.riwayat-petugas-section .riwayat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.riwayat-petugas-section .bolos-count {
+    color: #dc3545;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.izin-petugas-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+.izin-petugas-item:hover { background-color: #fafafa; }
+.izin-petugas-item h4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+}
+.item-highlight {
+    background-color: #f8d7da; /* Background merah muda untuk Bolos */
+    border-left: 5px solid #dc3545;
+}
+
+/* --- Tabel Responsif (Admin) --- */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+}
+.center { text-align: center; }
+
+/* Mobile Table View (Card like) */
+@media (max-width: 500px) {
+    table { border: 0; }
+    table thead { display: none; }
+    table tr {
+        margin-bottom: 10px;
+        display: block;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+    }
+    table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+    table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+    .total-izin { text-align: center; font-size: 1.1em; }
+}
+
+/* --- Footer Aksi (Keluar/Ubah Password) --- */
+.footer-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+.footer-actions .btn {
+    flex-grow: 1;
+    margin: 0 5px;
+}
