@@ -1,12 +1,39 @@
 <?php
-include '../includes/config.php';
+session_start();
+
+// =========================================
+// FUNGSI REDIRECT
+// =========================================
+function redirect($url) {
+    header("Location: " . $url);
+    exit();
+}
+
+// =========================================
+// FUNGSI CEK LOGIN
+// =========================================
+function check_login($role_required = null) {
+    if (!isset($_SESSION['user_id'])) {
+        redirect('../index.php'); // Jika belum login
+    }
+
+    // Mencegah role lain masuk
+    if ($role_required && $_SESSION['role'] !== $role_required) {
+        redirect('../' . $_SESSION['role'] . '/index.php');
+    }
+}
+
 check_login('admin');
-// Hardcode data rekap
+
+// =========================================
+// DATA HARDCODE REKAP IZIN
+// =========================================
 $rekap_izin = [
     ['jenis' => 'Izin Keluar Kelas', 'menunggu' => '-', 'diizinkan' => '-', 'ditolak' => 1, 'bolos' => '-'],
     ['jenis' => 'Di Jemput', 'menunggu' => '-', 'diizinkan' => 2, 'ditolak' => 1, 'bolos' => '-'],
     ['jenis' => 'Izin Masuk Sekolah', 'menunggu' => '-', 'diizinkan' => 3, 'ditolak' => '-', 'bolos' => '-'],
 ];
+
 $total_izin = 18;
 ?>
 <!DOCTYPE html>
@@ -20,19 +47,22 @@ $total_izin = 18;
 <body>
     <div class="dashboard-container admin-dashboard">
         <header class="admin-header">
-                        <h2>Selamat Datang, Admin!</h2>
+            <h2>Selamat Datang, Admin!</h2>
             <p>MAN 2 Kota Madiun</p>
         </header>
 
         <main class="content-wrapper">
+
+            <!-- Informasi Sekolah -->
             <section class="card school-info-section fade-in">
                 <h3>ℹ️ Informasi Sekolah</h3>
-                <p>Nama: **MAN 2 Kota Madiun**</p>
+                <p>Nama: <strong>MAN 2 Kota Madiun</strong></p>
                 <p>Alamat: Jl.</p>
                 <p>Lokasi: 7.63456, 111.52789 <span class="status status-danger">MATI</span></p>
                 <button class="btn btn-secondary">Atur Data Sekolah</button>
             </section>
             
+            <!-- Manajemen Siswa -->
             <section class="card student-management-section fade-in">
                 <h3>👥 Manajemen Siswa</h3>
                 <div class="button-group">
@@ -46,10 +76,13 @@ $total_izin = 18;
                     <input type="file" id="excelFile" name="file" accept=".xlsx" class="input-file">
                     <label for="excelFile" class="btn btn-upload-label">Pilih File Excel (.xlsx)</label>
                     <button class="btn btn-primary upload-simpan-btn">Upload & Simpan</button>
-                    <p class="upload-format">format: NIS | Nama Lengkap | Kelas • Password default: 12345678</p>
+                    <p class="upload-format">
+                        format: NIS | Nama Lengkap | Kelas • Password default: 12345678
+                    </p>
                 </div>
             </section>
 
+            <!-- Rekap Perizinan -->
             <section class="card rekap-izin-section fade-in">
                 <h3>📊 Rekap Perizinan</h3>
                 <div class="button-group rekap-actions">
@@ -73,20 +106,28 @@ $total_izin = 18;
                             <tr>
                                 <td data-label="Jenis Izin"><?= $izin['jenis'] ?></td>
                                 <td data-label="Menunggu" class="center"><?= $izin['menunggu'] ?></td>
-                                <td data-label="Diizinkan" class="center"><span class="badge badge-success"><?= $izin['diizinkan'] ?></span></td>
-                                <td data-label="Ditolak" class="center"><span class="badge badge-danger"><?= $izin['ditolak'] ?></span></td>
+                                <td data-label="Diizinkan" class="center">
+                                    <span class="badge badge-success"><?= $izin['diizinkan'] ?></span>
+                                </td>
+                                <td data-label="Ditolak" class="center">
+                                    <span class="badge badge-danger"><?= $izin['ditolak'] ?></span>
+                                </td>
                                 <td data-label="Bolos" class="center"><?= $izin['bolos'] ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
-                <p class="total-izin">Total Izin: **<?= $total_izin ?>**</p>
+
+                <p class="total-izin">Total Izin: <strong><?= $total_izin ?></strong></p>
             </section>
+
         </main>
 
         <footer class="footer-actions">
-            <a href="../logout.php" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+            <a href="../logout.php" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Keluar
+            </a>
         </footer>
     </div>
 </body>

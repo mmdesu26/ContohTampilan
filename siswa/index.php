@@ -1,7 +1,33 @@
 <?php
-include '../includes/config.php';
+session_start();
+
+// ==========================
+// FUNGSI REDIRECT
+// ==========================
+function redirect($url) {
+    header("Location: " . $url);
+    exit();
+}
+
+// ==========================
+// FUNGSI CEK LOGIN
+// ==========================
+function check_login($role_required = null) {
+    if (!isset($_SESSION['user_id'])) {
+        redirect('../index.php');
+    }
+
+    if ($role_required && $_SESSION['role'] !== $role_required) {
+        redirect('../' . $_SESSION['role'] . '/index.php');
+    }
+}
+
+// WAJIB: Pastikan hanya siswa yang dapat masuk halaman ini
 check_login('siswa');
-// Hardcode data riwayat karena diminta tidak menggunakan DB untuk ini
+
+// ==========================
+// DATA RIWAYAT HARDCODE
+// ==========================
 $riwayat_izin = [
     ['jenis' => 'Izin Keluar Kelas', 'alasan' => 'makan', 'status' => 'TELAH KEMBALI KE SEKOLAH', 'waktu' => '13 Nov 2025 14:35'],
     ['jenis' => 'Izin Keluar Kelas', 'alasan' => 'makan', 'status' => 'Menunggu', 'waktu' => '13 Nov 2025 13:44'],
@@ -18,7 +44,7 @@ $riwayat_izin = [
 <body>
     <div class="dashboard-container">
         <header class="siswa-header">
-                        <h2>Hai, <?= htmlspecialchars($_SESSION['nama']) ?>!</h2>
+            <h2>Hai, <?= htmlspecialchars($_SESSION['nama']) ?>!</h2>
             <p>NIS: <?= htmlspecialchars($_SESSION['nis']) ?> • Kelas: <?= htmlspecialchars($_SESSION['kelas']) ?></p>
         </header>
 
@@ -40,7 +66,10 @@ $riwayat_izin = [
                     <h4><?= $izin['jenis'] ?></h4>
                     <p>Alasan: <?= $izin['alasan'] ?></p>
                     <?php 
-                        $class = ($izin['status'] === 'TELAH KEMBALI KE SEKOLAH') ? 'status-success' : (($izin['status'] === 'Menunggu') ? 'status-pending' : 'status-danger');
+                        $class = ($izin['status'] === 'TELAH KEMBALI KE SEKOLAH') ? 'status-success' 
+                                : (($izin['status'] === 'Menunggu') ? 'status-pending' 
+                                : 'status-danger');
+
                         $text = ($izin['status'] === 'Menunggu') ? 'MENUNGGU' : $izin['status'];
                     ?>
                     <span class="status <?= $class ?>"><?= $text ?></span>
