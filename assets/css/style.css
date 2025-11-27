@@ -1,6 +1,6 @@
 /* =========================================
    1. RESET & BASE STYLING (GLOBAL)
-   Digunakan di SEMUA halaman 
+   Digunakan di SEMUA halaman
    ========================================= */
 * {
   box-sizing: border-box;
@@ -21,13 +21,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* =================================================================
-   >>> BAGIAN KHUSUS HALAMAN LOGIN <<<
-   (Class: .login-body, .login-card, .btn-login, input form, dll)
-   ================================================================= */
-
 /* =========================================
-   2. LOGIN PAGE STYLES
+   2. BAGIAN KHUSUS HALAMAN LOGIN
    ========================================= */
 .login-body {
   background: linear-gradient(135deg, #0061f2 0%, #6900f2 100%);
@@ -44,7 +39,7 @@ body {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   z-index: 0;
-  animation: float 6s ease-in-out infinite;
+  animation: floatCircle 6s ease-in-out infinite;
 }
 .circle-1 {
   width: 300px;
@@ -61,14 +56,9 @@ body {
   animation-delay: 2s;
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(20px);
-  }
+@keyframes floatCircle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(20px); }
 }
 
 .login-wrapper {
@@ -118,19 +108,9 @@ body {
   animation: bounce 2s infinite;
 }
 @keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
 }
 .divider {
   height: 4px;
@@ -204,34 +184,19 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  animation: slideInLeft 0.5s ease-out;
+  animation: slideInLeftBox 0.5s ease-out;
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@keyframes slideInLeftBox {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.error-anim {
-  animation: shake 0.5s;
-}
+.error-anim { animation: shake 0.5s; }
 @keyframes shake {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
 
 .login-footer p {
@@ -240,14 +205,13 @@ body {
   margin-top: 30px;
 }
 
+
 /* =================================================================
-   >>> BAGIAN KHUSUS DASHBOARD (UI PETUGAS) <<<
-   (Mulai dari sini ke bawah digunakan untuk halaman petugas)
-   Termasuk: Header gradient, Kartu, List Riwayat, Badges, Button Logout
+   >>> BAGIAN KHUSUS DASHBOARD (UI PETUGAS) - ENHANCED VERSION <<<
    ================================================================= */
 
 /* =========================================
-   3. DASHBOARD STYLES
+   3. DASHBOARD STYLES - ENHANCED
    ========================================= */
 
 .dashboard-body {
@@ -263,19 +227,19 @@ body {
   position: relative;
 }
 
-/* --- Animasi Global Dashboard --- */
+/* Enhanced animations with better easing */
 .fade-in-down {
-  animation: fadeInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: fadeInDown 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 .fade-in-up {
   opacity: 0;
-  animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-40px);
   }
   to {
     opacity: 1;
@@ -286,7 +250,7 @@ body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -294,16 +258,56 @@ body {
   }
 }
 
-/* --- Header Dashboard Petugas --- */
+/* New pulse animation for icons */
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* Smooth slide-in animation for list items */
+@keyframes slideInItems {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Animation for empty state float */
+@keyframes floatEmpty {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+
+/* --- Header Dashboard Petugas - ENHANCED --- */
 .header-gradient {
-  background: linear-gradient(135deg, #0061f2 0%, #6900f2 100%);
+  background: linear-gradient(135deg, #0061f2 0%, #003d99 50%, #6900f2 100%);
   color: white;
-  padding: 35px 20px 55px 20px;
-  border-radius: 0 0 35px 35px;
-  margin-bottom: -35px;
+  padding: 40px 20px 65px 20px;
+  border-radius: 0 0 40px 40px;
+  margin-bottom: -40px;
   position: relative;
   z-index: 10;
-  box-shadow: 0 10px 40px rgba(0, 97, 242, 0.2);
+  box-shadow: 0 15px 50px rgba(0, 97, 242, 0.25);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Add subtle background pattern effect */
+.header-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .header-content {
@@ -312,60 +316,95 @@ body {
   align-items: center;
   max-width: 100%;
   padding: 0 5px;
+  position: relative;
+  z-index: 2;
 }
 
-.profile-info h2 {
+.profile-info h1 {
   margin: 0;
-  font-size: clamp(18px, 5vw, 24px);
-  font-weight: 700;
-  letter-spacing: -0.5px;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
 }
+
 .profile-info p {
-  margin: 8px 0 0;
-  opacity: 0.95;
+  margin: 6px 0 0;
+  opacity: 0.92;
   font-size: clamp(12px, 3.5vw, 14px);
+  font-weight: 500;
 }
 
 .header-icon {
-  font-size: clamp(28px, 8vw, 40px);
-  background: rgba(255, 255, 255, 0.2);
-  width: clamp(45px, 12vw, 60px);
-  height: clamp(45px, 12vw, 60px);
+  font-size: clamp(32px, 10vw, 48px);
+  background: rgba(255, 255, 255, 0.15);
+  width: clamp(50px, 14vw, 70px);
+  height: clamp(50px, 14vw, 70px);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .header-gradient:hover .header-icon {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1) rotate(5deg);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* --- Content & Cards Dashboard --- */
+/* --- Content & Cards - ENHANCED --- */
 .content-wrapper {
-  padding: 40px 15px 30px 15px;
+  padding: 50px 15px 35px 15px;
   position: relative;
   z-index: 2;
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
 .card {
   background: white;
-  padding: clamp(16px, 5vw, 24px);
-  margin-bottom: 20px;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: clamp(18px, 6vw, 28px);
+  margin-bottom: 24px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 97, 242, 0.05);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add subtle gradient overlay on hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 97, 242, 0.03), transparent);
+  transition: left 0.5s ease;
 }
 
 .card:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+  box-shadow: 0 16px 50px rgba(0, 97, 242, 0.15);
+  transform: translateY(-4px);
+  border-color: rgba(0, 97, 242, 0.1);
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card h2 {
+  margin: 0 0 20px 0;
+  font-size: clamp(16px, 4.5vw, 20px);
+  color: #1a2332;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .card h3 {
@@ -378,22 +417,26 @@ body {
 
 .empty-state {
   text-align: center;
-  padding: 25px 15px;
+  padding: 35px 20px;
   color: #888;
 }
+
 .empty-state .icon {
-  font-size: clamp(28px, 8vw, 35px);
+  font-size: clamp(32px, 10vw, 45px);
   display: block;
-  margin-bottom: 12px;
-  opacity: 0.6;
-  animation: float 3s ease-in-out infinite;
+  margin-bottom: 14px;
+  opacity: 0.7;
+  animation: floatEmpty 3.5s ease-in-out infinite;
 }
+
 .empty-state p {
   margin: 0;
   font-size: clamp(13px, 3.5vw, 15px);
+  color: #666;
+  font-weight: 500;
 }
 
-/* --- List Riwayat Petugas --- */
+/* --- Riwayat List - ENHANCED --- */
 .card-header-flex {
   display: flex;
   justify-content: space-between;
@@ -407,151 +450,183 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
 
 .title-group h3 {
-  margin: 0 0 5px 0;
+  margin: 0 0 6px 0;
   font-size: clamp(15px, 4vw, 18px);
-}
-.title-group small {
-  color: #888;
-  font-size: clamp(11px, 3vw, 12px);
-  display: block;
+  color: #1a2332;
+  font-weight: 800;
 }
 
+.title-group small {
+  color: #999;
+  font-size: clamp(11px, 3vw, 12px);
+  display: block;
+  font-weight: 500;
+}
+
+/* Enhanced alert styling with better colors */
 .alert-mini {
-  background: #fff5f5;
-  color: #e03131;
-  font-size: clamp(11px, 3vw, 13px);
-  padding: 12px 14px;
-  border-radius: 10px;
-  border-left: 4px solid #e03131;
-  margin-bottom: 18px;
-  animation: slideInLeft 0.5s ease-out;
+  background: linear-gradient(135deg, #ffe5e5 0%, #fff5f5 100%);
+  color: #c92a2a;
+  font-size: clamp(12px, 3vw, 13px);
+  padding: 14px 16px;
+  border-radius: 12px;
+  border-left: 4px solid #ff6b6b;
+  margin-bottom: 20px;
+  animation: slideInItems 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  font-weight: 600;
 }
 
 .riwayat-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
+/* Improved list item styling with staggered animation */
 .list-item {
   display: flex;
   align-items: center;
-  padding: clamp(12px, 3vw, 16px);
-  background: #fff;
-  border: 1px solid #f0f0f0;
-  border-radius: 14px;
+  padding: clamp(14px, 4vw, 18px);
+  background: #fafbff;
+  border: 1.5px solid #f0f0f0;
+  border-radius: 16px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: slideInItems 0.5s ease-out forwards;
+  position: relative;
+  overflow: hidden;
 }
 
+.list-item:nth-child(1) { animation-delay: 0s; }
+.list-item:nth-child(2) { animation-delay: 0.1s; }
+.list-item:nth-child(3) { animation-delay: 0.2s; }
+.list-item:nth-child(4) { animation-delay: 0.3s; }
+.list-item:nth-child(5) { animation-delay: 0.4s; }
+.list-item:nth-child(6) { animation-delay: 0.5s; }
+
 .list-item:hover {
-  background: #f8f9fa;
-  border-color: #e8e8e8;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transform: translateX(4px);
+  background: linear-gradient(135deg, #f5f9ff 0%, #fafbff 100%);
+  border-color: #d0e0f0;
+  box-shadow: 0 6px 16px rgba(0, 97, 242, 0.1);
+  transform: translateX(6px);
 }
 
 .list-item:active {
-  transform: scale(0.98);
-  background: #f8f9fa;
+  transform: scale(0.98) translateX(6px);
 }
 
+/* Enhanced bolos item styling */
 .item-bolos {
-  background: #fff5f5;
+  background: linear-gradient(135deg, #ffe5e5 0%, #fff5f5 100%);
   border-color: #ffc9c9;
 }
 
 .item-bolos:hover {
-  background: #ffe5e5;
-  box-shadow: 0 4px 12px rgba(255, 108, 108, 0.1);
+  background: linear-gradient(135deg, #ffcccc 0%, #ffe0e0 100%);
+  box-shadow: 0 6px 16px rgba(255, 108, 108, 0.15);
 }
 
+/* Enhanced icon styling with better animations */
 .item-icon {
-  font-size: clamp(18px, 5vw, 24px);
-  margin-right: clamp(12px, 4vw, 16px);
-  width: clamp(38px, 10vw, 45px);
-  height: clamp(38px, 10vw, 45px);
-  background: #f4f7f6;
+  font-size: clamp(20px, 6vw, 28px);
+  margin-right: clamp(14px, 5vw, 18px);
+  width: clamp(42px, 12vw, 50px);
+  height: clamp(42px, 12vw, 50px);
+  background: linear-gradient(135deg, #e8f0ff 0%, #f0f5ff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   flex-shrink: 0;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid rgba(0, 97, 242, 0.1);
 }
 
 .list-item:hover .item-icon {
-  background: #e8f0ff;
-  transform: scale(1.1);
+  background: linear-gradient(135deg, #d0e8ff 0%, #e8f0ff 100%);
+  transform: scale(1.15) rotate(8deg);
+  border-color: rgba(0, 97, 242, 0.3);
+  animation: pulse-icon 0.6s ease-in-out;
 }
 
 .item-details {
   flex-grow: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .item-name {
-  margin: 0 0 6px 0;
+  margin: 0;
   font-size: clamp(13px, 3.5vw, 15px);
   font-weight: 700;
-  color: #2c3e50;
+  color: #1a2332;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .item-meta {
-  font-size: clamp(10px, 2.5vw, 12px);
-  color: #999;
+  font-size: clamp(11px, 3vw, 12px);
+  color: #a0a8b8;
+  font-weight: 500;
 }
 
 .item-status {
   text-align: right;
   flex-shrink: 0;
-  margin-left: 10px;
+  margin-left: 12px;
 }
 
+/* Enhanced badge styling with better transitions */
 .badge {
-  padding: clamp(5px, 1.5vw, 7px) clamp(8px, 2vw, 12px);
-  border-radius: 20px;
-  font-size: clamp(9px, 2vw, 11px);
+  padding: clamp(6px, 1.8vw, 8px) clamp(10px, 2.5vw, 14px);
+  border-radius: 24px;
+  font-size: clamp(10px, 2.2vw, 12px);
   font-weight: 700;
   text-transform: uppercase;
   display: inline-block;
-  letter-spacing: 0.3px;
-  transition: all 0.3s ease;
+  letter-spacing: 0.4px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .badge:hover {
-  transform: scale(1.05);
+  transform: scale(1.08) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .badge-success {
-  background: #e6fcf5;
-  color: #0ca678;
+  background: linear-gradient(135deg, #d3fce0 0%, #e6fcf5 100%);
+  color: #0b8f5f;
 }
+
 .badge-danger {
-  background: #fff5f5;
-  color: #fa5252;
+  background: linear-gradient(135deg, #ffcccc 0%, #fff5f5 100%);
+  color: #c92a2a;
 }
+
 .badge-info {
-  background: #e7f5ff;
-  color: #228be6;
+  background: linear-gradient(135deg, #d0e8ff 0%, #e7f5ff 100%);
+  color: #1971c2;
 }
+
 .badge-warning {
-  background: #fff9db;
-  color: #f08c00;
+  background: linear-gradient(135deg, #fff4c1 0%, #fff9db 100%);
+  color: #d98c08;
 }
+
 .badge-default {
-  background: #f8f9fa;
+  background: linear-gradient(135deg, #f0f0f0 0%, #f8f9fa 100%);
   color: #495057;
 }
 
@@ -566,297 +641,165 @@ body {
   transform: scale(0.95);
 }
 
+/* Enhanced export button */
 .btn-outline-info {
-  background: transparent;
+  background: white;
   border: 2px solid #228be6;
   color: #228be6;
-  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 14px);
-  border-radius: 20px;
+  padding: clamp(8px, 2vw, 10px) clamp(14px, 3.5vw, 16px);
+  border-radius: 24px;
   font-size: clamp(11px, 3vw, 12px);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .btn-outline-info:hover {
   background: #e7f5ff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(34, 139, 230, 0.2);
+  box-shadow: 0 6px 16px rgba(34, 139, 230, 0.25);
+  border-color: #1971c2;
+}
+
+.btn-outline-info:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .btn-sm {
-  padding: clamp(5px, 1.5vw, 6px) clamp(10px, 2.5vw, 12px);
+  padding: clamp(6px, 1.8vw, 8px) clamp(12px, 3vw, 14px);
   font-size: clamp(10px, 2.5vw, 11px);
 }
 
+/* Enhanced pagination */
 .pagination {
   display: flex;
   justify-content: center;
-  gap: clamp(6px, 2vw, 10px);
-  margin-top: 25px;
+  gap: clamp(8px, 2.5vw, 12px);
+  margin-top: 28px;
   flex-wrap: wrap;
 }
 
 .btn-page {
-  width: clamp(32px, 10vw, 40px);
-  height: clamp(32px, 10vw, 40px);
-  border: 1.5px solid #e8e8e8;
+  width: clamp(36px, 11vw, 44px);
+  height: clamp(36px, 11vw, 44px);
+  border: 2px solid #e8e8e8;
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #555;
-  font-weight: bold;
+  color: #666;
+  font-weight: 700;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  font-size: clamp(11px, 3vw, 13px);
+  font-size: clamp(12px, 3vw, 14px);
 }
 
 .btn-page:hover {
   border-color: #0061f2;
   color: #0061f2;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 97, 242, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 97, 242, 0.2);
 }
 
 .btn-page.active {
-  background: linear-gradient(135deg, #0061f2, #6900f2);
+  background: linear-gradient(135deg, #0061f2 0%, #5a38f2 100%);
   color: white;
   border-color: transparent;
-  box-shadow: 0 6px 20px rgba(0, 97, 242, 0.3);
-  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 97, 242, 0.35);
+  transform: scale(1.08);
 }
 
 /* =========================================
-   4. LOGOUT SECTION (Ada di Dashboard Petugas)
+   4. LOGOUT SECTION - ENHANCED
    ========================================= */
 
 .logout-wrapper {
-  margin: 35px auto 20px auto;
+  margin: 42px auto 25px auto;
   text-align: center;
   display: flex;
   justify-content: center;
   padding: 0 15px;
+  animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+  opacity: 0;
 }
 
+/* Enhanced logout button with better animations */
 .btn-logout-premium {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(8px, 3vw, 12px);
+  gap: clamp(10px, 3.5vw, 14px);
 
   background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
   color: white !important;
 
-  padding: clamp(12px, 3.5vw, 16px) clamp(28px, 6vw, 40px);
+  padding: clamp(14px, 4vw, 18px) clamp(32px, 7vw, 44px);
   border-radius: 50px;
   text-decoration: none;
   font-weight: 700;
   font-size: clamp(14px, 3.5vw, 16px);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 
-  box-shadow: 0 8px 24px rgba(255, 75, 43, 0.35);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 10px 28px rgba(255, 75, 43, 0.35);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   border: none;
   cursor: pointer;
 
   width: 100%;
-  max-width: 280px;
+  max-width: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add shine effect on hover */
+.btn-logout-premium::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .btn-logout-premium:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(255, 75, 43, 0.5);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 35px rgba(255, 75, 43, 0.5);
 }
 
 .btn-logout-premium:active {
-  transform: translateY(1px) scale(0.95);
-  box-shadow: 0 4px 12px rgba(255, 75, 43, 0.25);
+  transform: translateY(1px) scale(0.96);
+  box-shadow: 0 6px 16px rgba(255, 75, 43, 0.3);
 }
 
 .icon-logout {
-  font-size: clamp(16px, 4vw, 20px);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: clamp(16px, 4.5vw, 22px);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: inline-flex;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
+
 .btn-logout-premium:hover .icon-logout {
-  transform: translateX(-4px) scale(1.1);
+  transform: translateX(-5px) scale(1.15);
 }
 
 /* =========================================
-   5. RESPONSIVE DESIGN (Berdampak ke Dashboard Petugas)
-   ========================================= */
-
-/* Tablet & Small Screens */
-@media (max-width: 768px) {
-  .header-gradient {
-    padding: 30px 15px 50px 15px;
-    margin-bottom: -30px;
-  }
-
-  .content-wrapper {
-    padding: 35px 12px 25px 12px;
-  }
-
-  .card {
-    margin-bottom: 18px;
-  }
-
-  .riwayat-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .btn-outline-info {
-    width: 100%;
-  }
-}
-
-/* Mobile Devices */
-@media (max-width: 480px) {
-  body {
-    font-size: 14px;
-  }
-
-  .header-gradient {
-    padding: 25px 15px 45px 15px;
-    border-radius: 0 0 25px 25px;
-    margin-bottom: -25px;
-  }
-
-  .content-wrapper {
-    padding: 32px 12px 20px 12px;
-  }
-
-  .card {
-    padding: 14px;
-    margin-bottom: 15px;
-    border-radius: 14px;
-  }
-
-  .card h3 {
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
-
-  .list-item {
-    padding: 12px;
-    border-radius: 12px;
-    gap: 10px;
-  }
-
-  .item-icon {
-    width: 38px;
-    height: 38px;
-    font-size: 18px;
-  }
-
-  .item-details {
-    flex: 1;
-  }
-
-  .item-name {
-    font-size: 13px;
-  }
-
-  .item-meta {
-    font-size: 11px;
-  }
-
-  .item-status {
-    margin-left: 8px;
-  }
-
-  .badge {
-    padding: 5px 10px;
-    font-size: 9px;
-  }
-
-  .pagination {
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .btn-page {
-    width: 36px;
-    height: 36px;
-    font-size: 12px;
-  }
-
-  .logout-wrapper {
-    margin: 25px 0;
-    padding: 0 12px;
-  }
-
-  .btn-logout-premium {
-    width: 100%;
-    padding: 13px 20px;
-    font-size: 15px;
-  }
-
-  .riwayat-header {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .btn-outline-info {
-    width: 100%;
-  }
-
-  .alert-mini {
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-}
-
-/* Very Small Phones */
-@media (max-width: 360px) {
-  .profile-info h2 {
-    font-size: 18px;
-  }
-
-  .card h3 {
-    font-size: 15px;
-  }
-
-  .btn-logout-premium {
-    padding: 12px 16px;
-    font-size: 14px;
-  }
-}
-
-/* Large Screens - Desktop Optimization */
-@media (min-width: 1024px) {
-  .dashboard-container {
-    max-width: 800px;
-  }
-
-  .content-wrapper {
-    padding: 45px 20px 30px 20px;
-  }
-
-  .card {
-    padding: 28px;
-  }
-
-  .card:hover {
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
-    transform: translateY(-3px);
-  }
-
-  .list-item {
-    padding: 16px;
-  }
-
-  .list-item:hover {
-    transform: translateX(6px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  }
-}
-
-/* =========================================
-   6. TAMBAHAN UTILITIES (UNTUK ADMIN & SISWA)
+   5. TAMBAHAN UTILITIES (UNTUK ADMIN & SISWA)
    ========================================= */
 
 /* Tabel Admin Keren */
@@ -912,3 +855,71 @@ body {
 .bg-green { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
 .bg-orange { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
 .bg-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+
+/* =========================================
+   6. RESPONSIVE DESIGN - ENHANCED
+   ========================================= */
+
+/* Large Screens - Desktop Optimization */
+@media (min-width: 1024px) {
+  .dashboard-container {
+    max-width: 800px;
+  }
+
+  .content-wrapper {
+    padding: 45px 20px 30px 20px;
+  }
+
+  .card {
+    padding: 28px;
+  }
+
+  .card:hover {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+  }
+
+  .list-item {
+    padding: 16px;
+  }
+
+  .list-item:hover {
+    transform: translateX(6px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Tablet & Small Screens */
+@media (max-width: 768px) {
+  .header-gradient {
+    padding: 32px 16px 55px 16px;
+    border-radius: 0 0 32px 32px;
+    margin-bottom: -32px;
+  }
+
+  .content-wrapper {
+    padding: 40px 14px 28px 14px;
+  }
+
+  .card {
+    margin-bottom: 20px;
+    padding: 16px;
+  }
+
+  .riwayat-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-outline-info {
+    width: 100%;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  /* Styles specific to very small screens can be added here if needed */
+}
