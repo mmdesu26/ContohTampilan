@@ -74,40 +74,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sipiket - Login</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="login-body">
-    <div class="login-container">
-        <header class="header-gradient">
-            <h1>Sipiket</h1>
-            <p>Sistem Informasi Piket</p>
-        </header>
+    
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
 
-        <form method="POST" action="index.php" class="login-form">
-            
-            <?php if ($error): ?>
-                <div class="alert error" 
-                    style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-                    <?= $error ?>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <header class="login-header">
+                <div class="logo-icon">
+                    <span>📅</span>
                 </div>
-            <?php endif; ?>
+                <h1>Sipiket</h1>
+                <p>Sistem Informasi Piket</p>
+                <div class="divider"></div>
+            </header>
 
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="NIS / ID Petugas / admin" required>
-            </div>
+            <form method="POST" action="index.php" class="login-form">
+                
+                <?php if ($error): ?>
+                    <div class="alert-box error-anim">
+                        <span>⚠️</span> <?= $error ?>
+                    </div>
+                <?php endif; ?>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required>
-            </div>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="NIS / ID Petugas / Admin" autocomplete="off" required>
+                    <span class="focus-border"></span>
+                </div>
 
-            <button type="submit" class="btn btn-primary">Masuk</button>
-        </form>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Masukkan Password" required>
+                    <span class="focus-border"></span>
+                </div>
 
-        <footer><p>© 2025 MAN 2 Kota Madiun</p></footer>
+                <button type="submit" class="btn-login">
+                    Masuk Sekarang
+                </button>
+            </form>
+
+            <footer class="login-footer">
+                <p>© 2025 MAN 2 Kota Madiun</p>
+            </footer>
+        </div>
     </div>
+
 </body>
 </html>

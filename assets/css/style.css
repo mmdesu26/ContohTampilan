@@ -1,189 +1,914 @@
-/* --- Reset & Base Styling --- */
+/* =========================================
+   1. RESET & BASE STYLING (GLOBAL)
+   Digunakan di SEMUA halaman 
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* =================================================================
+   >>> BAGIAN KHUSUS HALAMAN LOGIN <<<
+   (Class: .login-body, .login-card, .btn-login, input form, dll)
+   ================================================================= */
+
+/* =========================================
+   2. LOGIN PAGE STYLES
+   ========================================= */
+.login-body {
+  background: linear-gradient(135deg, #0061f2 0%, #6900f2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+  animation: float 6s ease-in-out infinite;
+}
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  left: -50px;
+  animation-delay: 0s;
+}
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  right: -50px;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+.login-wrapper {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-header h1 {
+  margin: 10px 0 5px;
+  color: #333;
+  font-size: 28px;
+  font-weight: 700;
+}
+.login-header p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+.logo-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: inline-block;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+.divider {
+  height: 4px;
+  width: 50px;
+  background: linear-gradient(to right, #0061f2, #6900f2);
+  margin: 20px auto 30px;
+  border-radius: 2px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 25px;
+  text-align: left;
+}
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e5ea;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background: #fcfcfc;
+}
+.input-group input:focus {
+  border-color: #0061f2;
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 97, 242, 0.1);
+}
+
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #0061f2 0%, #6900f2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 15px rgba(0, 97, 242, 0.4);
+  margin-top: 10px;
+}
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 97, 242, 0.6);
+}
+.btn-login:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 10px rgba(0, 97, 242, 0.3);
+}
+
+.alert-box {
+  background-color: #fff2f2;
+  color: #d63031;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 5px solid #d63031;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.error-anim {
+  animation: shake 0.5s;
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.login-footer p {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 30px;
+}
+
+/* =================================================================
+   >>> BAGIAN KHUSUS DASHBOARD (UI PETUGAS) <<<
+   (Mulai dari sini ke bawah digunakan untuk halaman petugas)
+   Termasuk: Header gradient, Kartu, List Riwayat, Badges, Button Logout
+   ================================================================= */
+
+/* =========================================
+   3. DASHBOARD STYLES
+   ========================================= */
+
+.dashboard-body {
+  background: linear-gradient(180deg, #f8f9fa 0%, #f0f2f5 100%);
+  min-height: 100vh;
+}
+
 .dashboard-container {
-    max-width: 600px; /* Maksimum width untuk tampilan mobile-first */
-    margin: 0 auto;
-    padding: 0;
-}
-.content-wrapper { padding: 0 15px 20px 15px; }
-
-/* --- Header Gradien (Sama untuk semua role) --- */
-.header-gradient, .siswa-header, .admin-header, .petugas-header {
-    background: linear-gradient(135deg, #007bff, #00c6ff);
-    color: white;
-    padding: 30px 20px;
-    text-align: center;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    margin-bottom: 15px;
-}
-.header-gradient img, .siswa-header img, .admin-header img, .petugas-header img {
-    width: 60px; /* Ukuran logo di mobile */
-    margin-bottom: 10px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: inherit;
+  position: relative;
 }
 
-/* --- Card Style & Animasi Fade-in --- */
+/* --- Animasi Global Dashboard --- */
+.fade-in-down {
+  animation: fadeInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Header Dashboard Petugas --- */
+.header-gradient {
+  background: linear-gradient(135deg, #0061f2 0%, #6900f2 100%);
+  color: white;
+  padding: 35px 20px 55px 20px;
+  border-radius: 0 0 35px 35px;
+  margin-bottom: -35px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 10px 40px rgba(0, 97, 242, 0.2);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  padding: 0 5px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: clamp(18px, 5vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.profile-info p {
+  margin: 8px 0 0;
+  opacity: 0.95;
+  font-size: clamp(12px, 3.5vw, 14px);
+}
+
+.header-icon {
+  font-size: clamp(28px, 8vw, 40px);
+  background: rgba(255, 255, 255, 0.2);
+  width: clamp(45px, 12vw, 60px);
+  height: clamp(45px, 12vw, 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.header-gradient:hover .header-icon {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+/* --- Content & Cards Dashboard --- */
+.content-wrapper {
+  padding: 40px 15px 30px 15px;
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .card {
-    background: white;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease-in-out;
-    opacity: 0; /* Untuk animasi fade-in */
-    animation: fadeIn 0.8s forwards;
+  background: white;
+  padding: clamp(16px, 5vw, 24px);
+  margin-bottom: 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
-.card:hover { transform: translateY(-3px); }
 
-/* --- Button Styling & Responsiveness --- */
+.card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: clamp(15px, 4vw, 18px);
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 25px 15px;
+  color: #888;
+}
+.empty-state .icon {
+  font-size: clamp(28px, 8vw, 35px);
+  display: block;
+  margin-bottom: 12px;
+  opacity: 0.6;
+  animation: float 3s ease-in-out infinite;
+}
+.empty-state p {
+  margin: 0;
+  font-size: clamp(13px, 3.5vw, 15px);
+}
+
+/* --- List Riwayat Petugas --- */
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.riwayat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title-group h3 {
+  margin: 0 0 5px 0;
+  font-size: clamp(15px, 4vw, 18px);
+}
+.title-group small {
+  color: #888;
+  font-size: clamp(11px, 3vw, 12px);
+  display: block;
+}
+
+.alert-mini {
+  background: #fff5f5;
+  color: #e03131;
+  font-size: clamp(11px, 3vw, 13px);
+  padding: 12px 14px;
+  border-radius: 10px;
+  border-left: 4px solid #e03131;
+  margin-bottom: 18px;
+  animation: slideInLeft 0.5s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.riwayat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: clamp(12px, 3vw, 16px);
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.list-item:hover {
+  background: #f8f9fa;
+  border-color: #e8e8e8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateX(4px);
+}
+
+.list-item:active {
+  transform: scale(0.98);
+  background: #f8f9fa;
+}
+
+.item-bolos {
+  background: #fff5f5;
+  border-color: #ffc9c9;
+}
+
+.item-bolos:hover {
+  background: #ffe5e5;
+  box-shadow: 0 4px 12px rgba(255, 108, 108, 0.1);
+}
+
+.item-icon {
+  font-size: clamp(18px, 5vw, 24px);
+  margin-right: clamp(12px, 4vw, 16px);
+  width: clamp(38px, 10vw, 45px);
+  height: clamp(38px, 10vw, 45px);
+  background: #f4f7f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.list-item:hover .item-icon {
+  background: #e8f0ff;
+  transform: scale(1.1);
+}
+
+.item-details {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.item-name {
+  margin: 0 0 6px 0;
+  font-size: clamp(13px, 3.5vw, 15px);
+  font-weight: 700;
+  color: #2c3e50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-meta {
+  font-size: clamp(10px, 2.5vw, 12px);
+  color: #999;
+}
+
+.item-status {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.badge {
+  padding: clamp(5px, 1.5vw, 7px) clamp(8px, 2vw, 12px);
+  border-radius: 20px;
+  font-size: clamp(9px, 2vw, 11px);
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+.badge-success {
+  background: #e6fcf5;
+  color: #0ca678;
+}
+.badge-danger {
+  background: #fff5f5;
+  color: #fa5252;
+}
+.badge-info {
+  background: #e7f5ff;
+  color: #228be6;
+}
+.badge-warning {
+  background: #fff9db;
+  color: #f08c00;
+}
+.badge-default {
+  background: #f8f9fa;
+  color: #495057;
+}
+
 .btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 25px; /* Bentuk kapsul */
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.1s;
-    margin: 5px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.btn:active { transform: scale(0.98); } /* Animasi klik */
-.button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.button-group .btn { flex-grow: 1; margin: 0; } /* Tombol mengisi ruang */
-
-/* Warna Khusus Izin */
-.btn-izin-keluar { background-color: #007bff; color: white; }
-.btn-izin-jemput { background-color: #4CAF50; color: white; }
-.btn-izin-masuk { background-color: #ff9800; color: white; }
-.btn-success { background-color: #28a745; color: white; }
-.btn-info { background-color: #17a2b8; color: white; }
-.btn-danger { background-color: #dc3545; color: white; }
-.btn-danger-soft { background-color: #ffcccc; color: #dc3545; border: 1px solid #dc3545; }
-
-/* --- Status Badges (Siswa/Petugas) --- */
-.status {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.75em;
-    font-weight: bold;
-    display: inline-block;
-}
-.status-success { background-color: #28a745; color: white; }
-.status-success-light { background-color: #d4edda; color: #155724; }
-.status-pending { background-color: #ffc107; color: white; }
-.status-danger { background-color: #dc3545; color: white; }
-.badge-success { background-color: #d4edda; color: #155724; padding: 3px 6px; border-radius: 4px; }
-.badge-danger { background-color: #f8d7da; color: #721c24; padding: 3px 6px; border-radius: 4px; }
-
-/* --- Petugas & Riwayat Siswa Styling --- */
-.riwayat-izin-section h4 { margin-top: 5px; margin-bottom: 2px; }
-.izin-item { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px; }
-.izin-item:last-child { border-bottom: none; }
-
-.riwayat-petugas-section .riwayat-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.riwayat-petugas-section .bolos-count {
-    color: #dc3545;
-    font-weight: bold;
-    margin-right: 10px;
-}
-.izin-petugas-item {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.3s;
-}
-.izin-petugas-item:hover { background-color: #fafafa; }
-.izin-petugas-item h4 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1em;
-}
-.item-highlight {
-    background-color: #f8d7da; /* Background merah muda untuk Bolos */
-    border-left: 5px solid #dc3545;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-/* --- Tabel Responsif (Admin) --- */
-.table-responsive {
-    overflow-x: auto;
-    margin-top: 15px;
+.btn:active {
+  transform: scale(0.95);
 }
-table {
+
+.btn-outline-info {
+  background: transparent;
+  border: 2px solid #228be6;
+  color: #228be6;
+  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 14px);
+  border-radius: 20px;
+  font-size: clamp(11px, 3vw, 12px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-info:hover {
+  background: #e7f5ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 139, 230, 0.2);
+}
+
+.btn-sm {
+  padding: clamp(5px, 1.5vw, 6px) clamp(10px, 2.5vw, 12px);
+  font-size: clamp(10px, 2.5vw, 11px);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 10px);
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.btn-page {
+  width: clamp(32px, 10vw, 40px);
+  height: clamp(32px, 10vw, 40px);
+  border: 1.5px solid #e8e8e8;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  font-weight: bold;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: clamp(11px, 3vw, 13px);
+}
+
+.btn-page:hover {
+  border-color: #0061f2;
+  color: #0061f2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 97, 242, 0.15);
+}
+
+.btn-page.active {
+  background: linear-gradient(135deg, #0061f2, #6900f2);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(0, 97, 242, 0.3);
+  transform: scale(1.05);
+}
+
+/* =========================================
+   4. LOGOUT SECTION (Ada di Dashboard Petugas)
+   ========================================= */
+
+.logout-wrapper {
+  margin: 35px auto 20px auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.btn-logout-premium {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 12px);
+
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  color: white !important;
+
+  padding: clamp(12px, 3.5vw, 16px) clamp(28px, 6vw, 40px);
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(14px, 3.5vw, 16px);
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 8px 24px rgba(255, 75, 43, 0.35);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: none;
+  cursor: pointer;
+
+  width: 100%;
+  max-width: 280px;
+}
+
+.btn-logout-premium:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(255, 75, 43, 0.5);
+}
+
+.btn-logout-premium:active {
+  transform: translateY(1px) scale(0.95);
+  box-shadow: 0 4px 12px rgba(255, 75, 43, 0.25);
+}
+
+.icon-logout {
+  font-size: clamp(16px, 4vw, 20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+}
+.btn-logout-premium:hover .icon-logout {
+  transform: translateX(-4px) scale(1.1);
+}
+
+/* =========================================
+   5. RESPONSIVE DESIGN (Berdampak ke Dashboard Petugas)
+   ========================================= */
+
+/* Tablet & Small Screens */
+@media (max-width: 768px) {
+  .header-gradient {
+    padding: 30px 15px 50px 15px;
+    margin-bottom: -30px;
+  }
+
+  .content-wrapper {
+    padding: 35px 12px 25px 12px;
+  }
+
+  .card {
+    margin-bottom: 18px;
+  }
+
+  .riwayat-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-outline-info {
     width: 100%;
-    border-collapse: collapse;
-}
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-}
-.center { text-align: center; }
-
-/* Mobile Table View (Card like) */
-@media (max-width: 500px) {
-    table { border: 0; }
-    table thead { display: none; }
-    table tr {
-        margin-bottom: 10px;
-        display: block;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px;
-    }
-    table td {
-        border: none;
-        position: relative;
-        padding-left: 50%;
-        text-align: right;
-    }
-    table td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: bold;
-    }
-    .total-izin { text-align: center; font-size: 1.1em; }
+  }
 }
 
-/* --- Footer Aksi (Keluar/Ubah Password) --- */
-.footer-actions {
-    display: flex;
-    justify-content: space-around;
-    padding: 15px;
-    background: white;
-    border-top: 1px solid #eee;
-    position: sticky;
-    bottom: 0;
-    z-index: 10;
+/* Mobile Devices */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .header-gradient {
+    padding: 25px 15px 45px 15px;
+    border-radius: 0 0 25px 25px;
+    margin-bottom: -25px;
+  }
+
+  .content-wrapper {
+    padding: 32px 12px 20px 12px;
+  }
+
+  .card {
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 14px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .list-item {
+    padding: 12px;
+    border-radius: 12px;
+    gap: 10px;
+  }
+
+  .item-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .item-details {
+    flex: 1;
+  }
+
+  .item-name {
+    font-size: 13px;
+  }
+
+  .item-meta {
+    font-size: 11px;
+  }
+
+  .item-status {
+    margin-left: 8px;
+  }
+
+  .badge {
+    padding: 5px 10px;
+    font-size: 9px;
+  }
+
+  .pagination {
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .btn-page {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .logout-wrapper {
+    margin: 25px 0;
+    padding: 0 12px;
+  }
+
+  .btn-logout-premium {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 15px;
+  }
+
+  .riwayat-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-outline-info {
+    width: 100%;
+  }
+
+  .alert-mini {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
 }
-.footer-actions .btn {
-    flex-grow: 1;
-    margin: 0 5px;
+
+/* Very Small Phones */
+@media (max-width: 360px) {
+  .profile-info h2 {
+    font-size: 18px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+  }
+
+  .btn-logout-premium {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
 }
+
+/* Large Screens - Desktop Optimization */
+@media (min-width: 1024px) {
+  .dashboard-container {
+    max-width: 800px;
+  }
+
+  .content-wrapper {
+    padding: 45px 20px 30px 20px;
+  }
+
+  .card {
+    padding: 28px;
+  }
+
+  .card:hover {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+  }
+
+  .list-item {
+    padding: 16px;
+  }
+
+  .list-item:hover {
+    transform: translateX(6px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* =========================================
+   6. TAMBAHAN UTILITIES (UNTUK ADMIN & SISWA)
+   ========================================= */
+
+/* Tabel Admin Keren */
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 15px;
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.custom-table th {
+  text-align: left;
+  padding: 12px;
+  background-color: #f8f9fa;
+  color: #666;
+  font-weight: 600;
+  border-bottom: 2px solid #eee;
+}
+.custom-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+.custom-table tr:last-child td { border-bottom: none; }
+
+/* Grid Tombol Siswa */
+.grid-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+.btn-menu {
+  padding: 15px;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.btn-menu:active { transform: scale(0.95); }
+
+/* Warna Tombol Spesifik */
+.bg-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.bg-green { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+.bg-orange { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+.bg-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }

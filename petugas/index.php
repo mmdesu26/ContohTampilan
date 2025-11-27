@@ -2,7 +2,7 @@
 session_start();
 
 // ==========================
-// FUNGSI REDIRECT
+// 1. FUNGSI REDIRECT
 // ==========================
 function redirect($url) {
     header("Location: " . $url);
@@ -10,23 +10,23 @@ function redirect($url) {
 }
 
 // ==========================
-// FUNGSI CEK LOGIN
+// 2. FUNGSI CEK LOGIN
 // ==========================
 function check_login($role_required = null) {
     if (!isset($_SESSION['user_id'])) {
-        redirect('../index.php'); // Belum login → balik ke login
+        redirect('../index.php');
     }
 
     if ($role_required && $_SESSION['role'] !== $role_required) {
-        redirect('../' . $_SESSION['role'] . '/index.php'); // Cegah akses lintas role
+        redirect('../' . $_SESSION['role'] . '/index.php');
     }
 }
 
-// Hanya petugas yang boleh masuk halaman ini
+// Hanya petugas yang boleh masuk
 check_login('petugas');
 
 // ==========================
-// DATA RIWAYAT HARDCODE
+// 3. DATA RIWAYAT (INI YANG SEBELUMNYA HILANG)
 // ==========================
 $semua_riwayat = [
     ['nama' => 'Musadek', 'status' => 'Diizinkan', 'jenis' => 'Masuk', 'waktu' => '13 Nov 2025 15:04'],
@@ -41,73 +41,112 @@ $semua_riwayat = [
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Petugas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Dashboard Petugas MAN 2 Kota Madiun">
+    <meta name="theme-color" content="#0061f2">
+    <title>Dashboard Petugas - MAN 2 Kota Madiun</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
-    <div class="dashboard-container petugas-dashboard">
-        <header class="petugas-header">
-            <h2>Petugas Piket</h2>
-            <p>MAN 2 Kota Madiun</p>
+<body class="dashboard-body">
+    
+    <div class="dashboard-container">
+        
+        <header class="header-gradient fade-in-down" role="banner">
+            <div class="header-content">
+                <div class="profile-info">
+                    <h1 style="margin: 0; font-size: 22px; font-weight: 700;">Halo, Petugas! 👋</h1>
+                    <p>MAN 2 Kota Madiun</p>
+                </div>
+                <div class="header-icon" aria-label="Officer icon">
+                    <span>👮‍♂️</span>
+                </div>
+            </div>
         </header>
 
-        <main class="content-wrapper">
-            <section class="card pending-izin fade-in">
-                <h3>🏆 Menunggu Persetujuan</h3>
-                <p>Tidak ada permohonan menunggu.</p>
+        <main class="content-wrapper" role="main">
+            
+            <section class="card fade-in-up" style="animation-delay: 0.1s;">
+                <div class="card-header-flex">
+                    <h2 style="margin: 0; font-size: 16px; color: #444; font-weight: 700;">⏳ Menunggu Persetujuan</h2>
+                </div>
+                <div class="empty-state">
+                    <span class="icon" role="img" aria-label="Check mark">✅</span>
+                    <p>Tidak ada permohonan baru.</p>
+                </div>
             </section>
             
-            <section class="card riwayat-petugas-section fade-in">
+            <section class="card fade-in-up" style="animation-delay: 0.2s;">
                 <div class="riwayat-header">
-                    <h3>📜 Semua Riwayat Izin (<?= count($semua_riwayat) ?> data)</h3>
-                    <div class="header-actions">
-                        <span class="bolos-count">💔 3 Siswa bolos</span>
-                        <button class="btn btn-info">Ekspor Semua (.xlsx)</button>
+                    <div class="title-group">
+                        <h2 style="margin: 0; font-size: 16px; color: #444; font-weight: 700;">📜 Riwayat Aktivitas</h2>
+                        <small>Total: <?= count($semua_riwayat) ?> Data</small>
                     </div>
+                    <button class="btn btn-sm btn-outline-info">📥 Ekspor .xlsx</button>
                 </div>
 
-                <div class="riwayat-list">
+                <div class="alert-mini" role="alert">
+                    <span>🚨</span>
+                    <span><b>Info:</b> Terdeteksi 3 Siswa bolos bulan ini.</span>
+                </div>
+
+                <div class="riwayat-list" role="list">
                     <?php foreach ($semua_riwayat as $izin): ?>
                     <?php
-                        // Menentukan kelas CSS berdasarkan status
-                        $class = 'status-default';
-                        $status_text = $izin['status'];
-
+                        // Logika Styling Badge & Icon
+                        $badge_class = 'badge-default';
+                        $icon_jenis = '📝';
+                        
                         if ($izin['status'] === 'Diizinkan') { 
-                            $class = 'status-success'; 
+                            $badge_class = 'badge-success'; 
+                            $icon_jenis = '✅';
                         } elseif ($izin['status'] === 'Bolos') { 
-                            $class = 'status-danger'; 
+                            $badge_class = 'badge-danger'; 
+                            $icon_jenis = '❌';
                         } elseif ($izin['status'] === 'Telah Kembali Ke Sekolah') { 
-                            $class = 'status-success-light'; 
+                            $badge_class = 'badge-info'; 
+                            $icon_jenis = '🔄';
                         } elseif ($izin['status'] === 'Menunggu') { 
-                            $class = 'status-pending'; 
-                            $status_text = 'MENUNGGU'; 
+                            $badge_class = 'badge-warning'; 
+                            $icon_jenis = '⏳';
                         }
 
-                        // Highlight untuk bolos
-                        $highlight_class = isset($izin['is_bolos']) ? 'item-highlight' : '';
+                        $item_class = isset($izin['is_bolos']) ? 'item-bolos' : '';
                     ?>
-                    <div class="izin-petugas-item <?= $highlight_class ?>">
-                        <h4><?= $izin['nama'] ?> 
-                            <span class="status <?= $class ?>"><?= strtoupper($status_text) ?></span>
-                        </h4>
-                        <p><?= $izin['jenis'] ?> | <?= $izin['waktu'] ?></p>
+                    
+                    <div class="list-item <?= $item_class ?>" role="listitem">
+                        <div class="item-icon" role="img" aria-label="Status icon">
+                            <?= $icon_jenis ?>
+                        </div>
+                        <div class="item-details">
+                            <h3 class="item-name"><?= htmlspecialchars($izin['nama']) ?></h3>
+                            <div class="item-meta">
+                                <span><?= htmlspecialchars($izin['jenis']) ?></span> • <span><?= htmlspecialchars($izin['waktu']) ?></span>
+                            </div>
+                        </div>
+                        <div class="item-status">
+                            <span class="badge <?= $badge_class ?>"><?= htmlspecialchars($izin['status']) ?></span>
+                        </div>
                     </div>
                     <?php endforeach; ?>
                 </div>
 
-                <div class="pagination">
-                    <button class="btn btn-secondary">1</button>
-                    <button class="btn btn-secondary">2</button>
-                    <button class="btn btn-secondary">Next »</button>
-                </div>
+                <nav class="pagination" aria-label="Pagination">
+                    <button class="btn-page active" aria-label="Page 1" aria-current="page">1</button>
+                    <button class="btn-page" aria-label="Page 2">2</button>
+                    <button class="btn-page" aria-label="Next page">»</button>
+                </nav>
             </section>
+
+            <div class="logout-wrapper fade-in-up" style="animation-delay: 0.3s;">
+                <a href="../logout.php" class="btn-logout-premium" aria-label="Logout from application">
+                    <span class="icon-logout">🚪</span> 
+                    <span>Keluar Aplikasi</span>
+                </a>
+            </div>
+
+            <div style="height: 40px;"></div>
         </main>
 
-        <footer class="footer-actions">
-            <a href="../logout.php" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Keluar</a>
-        </footer>
     </div>
 </body>
 </html>
